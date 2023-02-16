@@ -1,0 +1,32 @@
+{
+    "name": "sxcu.cli",
+    "version": "1.0.0",
+    "description": "Command line interface to interact with the sxcu.net API.",
+    "main": "bin/index.js",
+    "scripts": {
+        "test": "sxcu test",
+        "check": "./node_modules/.bin/eslint bin/"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Lovely-Experiences/sxcu.cli.git"
+    },
+    "author": "Jacob Humston",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Lovely-Experiences/sxcu.cli/issues"
+    },
+    "homepage": "https://github.com/Lovely-Experiences/sxcu.cli#readme",
+    "bin": {
+        "sxcu": "bin/index.js"
+    },
+    "devDependencies": {
+        "eslint": "^8.34.0",
+        "eslint-config-prettier": "^8.6.0",
+        "eslint-plugin-prettier": "^4.2.1",
+        "prettier": "^2.8.4"
+    },
+    "dependencies": {
+        "sxcu.api": "^1.2.4"
+    }
+}
