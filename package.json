@@ -1,11 +1,12 @@
 {
     "name": "sxcu.cli",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Command line interface to interact with the sxcu.net API.",
     "main": "bin/index.js",
     "scripts": {
         "test": "sxcu test",
-        "check": "./node_modules/.bin/eslint bin/"
+        "check": "./node_modules/.bin/eslint bin/",
+        "li": "npm i -g ."
     },
     "repository": {
         "type": "git",
