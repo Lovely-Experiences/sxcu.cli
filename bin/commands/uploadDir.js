@@ -51,17 +51,21 @@ module.exports = {
                         data.log(`[error] [${count}/${files.length}] Failed to upload "${file}". ${error}`);
                     }
                 }
-                const newFileName = `output-${new Date().getTime()}.json`;
-                fs.writeFile(newFileName, JSON.stringify({ output: links }), function (error) {
-                    if (error) {
-                        data.log(`[error] Failed to save output to file, dumping to console...`);
-                        for (const link of links) {
-                            data.log(`[info] URL for file "${link.file}" is ${link.url}.`);
+                if (links.length === 0) {
+                    data.log('[error] Unable to upload any files in the directory provided.');
+                } else {
+                    const newFileName = `output-${new Date().getTime()}.json`;
+                    fs.writeFile(newFileName, JSON.stringify({ output: links }), function (error) {
+                        if (error) {
+                            data.log(`[error] Failed to save output to file, dumping to console...`);
+                            for (const link of links) {
+                                data.log(`[info] URL for file "${link.file}" is ${link.url}.`);
+                            }
+                        } else {
+                            data.log(`[success] Result/links can be found in "./${newFileName}."`);
                         }
-                    } else {
-                        data.log(`[success] Result/links can be found in "./${newFileName}."`);
-                    }
-                });
+                    });
+                }
             } else {
                 data.log(`[error] The directory "${directory}" does not exist on the current directory.`);
             }
