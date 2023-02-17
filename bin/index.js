@@ -3,6 +3,7 @@
 ////////////// Variables
 
 const fs = require('fs');
+// eslint-disable-next-line no-shadow-restricted-names
 const arguments = process.argv.slice(2);
 const command = arguments[0];
 const commands = {};
@@ -22,6 +23,14 @@ function log(message) {
 }
 
 ////////////// Main
+
+// Check if the user is using an unrecommended version of Node.
+// Display and error if they are.
+if (Number(process.versions.node.split('.')[0]) < 18) {
+    log(
+        '[warn] You are using a version of Node.js that is older then version 18. Some features may be unstable or not work at all.'
+    );
+}
 
 // Check if the user provided a command before doing anything else.
 if (command === undefined) {
