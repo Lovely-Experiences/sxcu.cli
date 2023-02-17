@@ -23,3 +23,7 @@ sxcu help
 The rest will be provided to you with commands.
 
 However, if you have any questions that can't be answered with commands, make an [issue](https://github.com/Lovely-Experiences/sxcu.cli)!
+
+# Extra Information
+
+The directory `cats` is a testing directory, use to test the uploading of images. Feel free to put whatever in this folder, just do not include any changes to it in your pull request if you decide to make one.
