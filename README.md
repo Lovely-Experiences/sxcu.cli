@@ -2,6 +2,8 @@
 
 Command line interface to interact with the sxcu.net API.
 
+https://user-images.githubusercontent.com/57332486/219874950-9e22e6d5-43fa-4c20-bcb7-591ca4928305.mp4
+
 Interested in a library instead? Visit [sxcu.api](https://github.com/Lovely-Experiences/sxcu.api).
 
 # Install
