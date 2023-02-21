@@ -46,9 +46,9 @@ module.exports = {
                         });
                     if (error === false) {
                         links.push({ file: file, url: result.url });
-                        data.log(`[success] [${count}/${files.length}] Uploaded "${file}" successfully.`);
+                        data.log(`[success] [${count}/${files.length}] Uploaded "${file}" successfully.`, true);
                     } else {
-                        data.log(`[error] [${count}/${files.length}] Failed to upload "${file}". ${error}`);
+                        data.log(`[error] [${count}/${files.length}] Failed to upload "${file}". ${error}`, true);
                     }
                 }
                 if (links.length === 0) {
@@ -57,12 +57,12 @@ module.exports = {
                     const newFileName = `output-${new Date().getTime()}.json`;
                     fs.writeFile(newFileName, JSON.stringify({ output: links }), function (error) {
                         if (error) {
-                            data.log(`[error] Failed to save output to file, dumping to console...`);
+                            data.log(`[error] Failed to save output to file, dumping to console...`, true);
                             for (const link of links) {
                                 data.log(`[info] URL for file "${link.file}" is ${link.url}.`);
                             }
                         } else {
-                            data.log(`[success] Result/links can be found in "./${newFileName}."`);
+                            data.log(`[success] Result/links can be found in "${process.cwd()}/${newFileName}".`);
                         }
                     });
                 }

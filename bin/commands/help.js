@@ -1,6 +1,6 @@
 module.exports = {
     name: 'help',
-    aliases: ['-h'],
+    aliases: ['commands', 'h'],
     description: 'Get a list of commands or information about a specific command.',
     usage: 'sxcu help [command]',
     run: function (data) {

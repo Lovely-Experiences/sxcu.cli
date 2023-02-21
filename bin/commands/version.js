@@ -1,6 +1,6 @@
 module.exports = {
     name: 'version',
-    aliases: ['-v'],
+    aliases: ['v'],
     description: 'Get the current version of the cli, api module, and Node.',
     usage: 'sxcu version',
     run: function (data) {

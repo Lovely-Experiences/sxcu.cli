@@ -7,18 +7,28 @@ const fs = require('fs');
 const arguments = process.argv.slice(2);
 const command = arguments[0];
 const commands = {};
+const modules = {};
 const colors = { reset: '\u001b[0m', red: '\u001b[31m', blue: '\u001b[34m', yellow: '\u001b[33m', green: '\u001b[32m' };
 
 ////////////// Methods
+let breakNextLine = false;
+function log(message, clearLastLine) {
+    let messageToLog = message
+        .replaceAll('[info]', `${colors.blue}[info]${colors.reset}`)
+        .replaceAll('[warn]', `${colors.yellow}[warn]${colors.reset}`)
+        .replaceAll('[error]', `${colors.red}[error]${colors.reset}`)
+        .replaceAll('[success]', `${colors.green}[success]${colors.reset}`);
 
-function log(message) {
-    console.log(
-        message
-            .replaceAll('[info]', `${colors.blue}[info]${colors.reset}`)
-            .replaceAll('[warn]', `${colors.yellow}[warn]${colors.reset}`)
-            .replaceAll('[error]', `${colors.red}[error]${colors.reset}`)
-            .replaceAll('[success]', `${colors.green}[success]${colors.reset}`)
-    );
+    if (clearLastLine === true) {
+        process.stdout.write('\r\x1b[K');
+        process.stdout.write(messageToLog);
+        breakNextLine = true;
+    } else {
+        if (breakNextLine === true) messageToLog = `\n${messageToLog}`;
+        console.log(messageToLog);
+        breakNextLine = false;
+    }
+
     return;
 }
 
@@ -47,6 +57,9 @@ for (const commandFile of fs.readdirSync(`${__dirname}/commands/`)) {
     });
 }
 
+// Load modules.
+modules['data'] = require('./modules/data.js');
+
 // Check if the command the user is trying to run exists.
 // If it does not, they are given an error.
 // However, if the command does exist, it gets executed with the needed information.
@@ -57,6 +70,7 @@ if (commands[command] !== undefined) {
         log: log,
         colors: colors,
         commands: commands,
+        modules: modules,
     });
 } else {
     log(`[error] Command "${command}" does not exist. For a list of commands, please run "sxcu help".`);
