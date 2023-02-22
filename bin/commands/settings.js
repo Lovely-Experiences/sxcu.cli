@@ -26,14 +26,35 @@ module.exports = {
                 break;
             }
             case 'set': {
-                const setting = data.arguments[2];
-                const value = data.arguments[3];
+                let setting = data.arguments[2];
+                let value = data.arguments[3];
                 if (!setting || !value) {
                     data.log(`[error] Please provide all parameters. "sxcu settings set <setting> <value>"`);
                     data.log('[info] "setting" is not case-sensitive, however "value" is.');
                     return;
                 }
-                // TODO: finish this - @jacobhumston
+                const config = dataModule.getConfig();
+                for (const key of Object.keys(config)) if (setting.toLowerCase() === key.toLowerCase()) setting = key;
+                if (config[setting] === undefined) {
+                    data.log(`[error] "${setting}" is not a valid setting.`);
+                } else {
+                    if (typeof config[setting] === 'boolean') {
+                        convertedValue = value.toLowerCase();
+                        if (convertedValue === 'true' || convertedValue === 'false') {
+                            config[setting] = convertedValue === 'true';
+                            dataModule.updateConfig(config);
+                            data.log(`[success] "${setting}" has been set to "${config[setting]}".`);
+                        } else {
+                            data.log(`[error] "${value}" is not a valid boolean.`);
+                        }
+                    } else if (typeof config[setting] === 'string') {
+                        config[setting] = value;
+                        dataModule.updateConfig(config);
+                        data.log(`[success] "${setting}" has been set to "${config[setting]}".`);
+                    } else {
+                        data.log(`[error] The setting "${setting}" has an unsupported type.`);
+                    }
+                }
                 break;
             }
             default: {
