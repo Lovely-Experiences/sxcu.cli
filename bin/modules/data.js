@@ -43,7 +43,14 @@ module.exports = {
     },
     getConfig: () => {
         createDataFolders();
-        return require(`${homeDir}/.sxcu-cli/config.json`);
+        const config = require(`${homeDir}/.sxcu-cli/config.json`);
+        for (const [setting, value] of Object.entries(defaultSettings)) {
+            if (typeof config[setting] !== typeof value) {
+                config[setting] = value;
+            }
+        }
+        module.exports.updateConfig(config);
+        return config;
     },
     updateConfig: (data) => {
         createDataFolders();
