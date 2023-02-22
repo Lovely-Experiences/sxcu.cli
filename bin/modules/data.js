@@ -3,6 +3,15 @@ const fs = require('fs');
 
 const homeDir = os.homedir();
 
+const defaultSettings = {
+    saveLogs: false,
+};
+
+const settingDescriptions = {
+    saveLogs:
+        'If true, all outputs from sxcu.cli will be added to a log.json file. Only recommended for testing purposes.',
+};
+
 // This methods will create the storage folders if they are not already present.
 function createDataFolders() {
     if (!fs.existsSync(`${homeDir}/.sxcu-cli`)) {
@@ -20,12 +29,26 @@ function createDataFolders() {
         );
     }
 
+    if (!fs.existsSync(`${homeDir}/.sxcu-cli/config.json`)) {
+        fs.writeFileSync(`${homeDir}/.sxcu-cli/config.json`, JSON.stringify(defaultSettings, null, 4));
+    }
+
     return;
 }
 
 module.exports = {
     getDataFolder: () => {
         createDataFolders();
-        return `${homeDir}/.sxcu.cli`;
+        return `${homeDir}/.sxcu-cli`;
     },
+    getConfig: () => {
+        createDataFolders();
+        return require(`${homeDir}/.sxcu-cli/config.json`);
+    },
+    updateConfig: (data) => {
+        createDataFolders();
+        fs.writeFileSync(`${homeDir}/.sxcu-cli/config.json`, JSON.stringify(data, null, 4));
+        return;
+    },
+    configDescriptions: settingDescriptions,
 };

@@ -35,7 +35,8 @@ actions['actions'] = {
 module.exports = {
     name: 'config',
     aliases: [],
-    description: 'Manage configuration files, these files can be used in other commands.',
+    description:
+        'Manage configuration files, these files can be used in other commands. If you\'re looking for general configuration, please run "sxcu settings".',
     usage: 'sxcu config <action>',
     run: function (data) {
         const command = data.arguments[1];

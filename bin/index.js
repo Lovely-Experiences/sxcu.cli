@@ -13,11 +13,32 @@ const colors = { reset: '\u001b[0m', red: '\u001b[31m', blue: '\u001b[34m', yell
 ////////////// Methods
 let breakNextLine = false;
 function log(message, clearLastLine) {
+    const dataModule = modules['data'];
+    const config = dataModule.getConfig();
+    const dataFolder = dataModule.getDataFolder();
+
     let messageToLog = message
         .replaceAll('[info]', `${colors.blue}[info]${colors.reset}`)
         .replaceAll('[warn]', `${colors.yellow}[warn]${colors.reset}`)
         .replaceAll('[error]', `${colors.red}[error]${colors.reset}`)
         .replaceAll('[success]', `${colors.green}[success]${colors.reset}`);
+
+    if (config.saveLogs === true) {
+        let messageWithNoColors = message;
+        for (const color of Object.values(colors)) {
+            messageWithNoColors = messageWithNoColors.replaceAll(color, '');
+        }
+        if (!fs.existsSync(`${dataFolder}/logs.json`)) {
+            fs.writeFileSync(
+                `${dataFolder}/logs.json`,
+                JSON.stringify({ logs: [{ message: messageWithNoColors, date: new Date() }] }, null, 4)
+            );
+        } else {
+            const currentLogs = require(`${dataFolder}/logs.json`);
+            currentLogs.logs.unshift({ message: messageWithNoColors, date: new Date() });
+            fs.writeFileSync(`${dataFolder}/logs.json`, JSON.stringify(currentLogs, null, 4));
+        }
+    }
 
     if (clearLastLine === true) {
         process.stdout.write('\r\x1b[K');
@@ -33,6 +54,9 @@ function log(message, clearLastLine) {
 }
 
 ////////////// Main
+
+// Load modules.
+modules['data'] = require('./modules/data.js');
 
 // Check if the user is using an unrecommended version of Node.
 // Display and error if they are.
@@ -56,9 +80,6 @@ for (const commandFile of fs.readdirSync(`${__dirname}/commands/`)) {
         commands[name] = commandData;
     });
 }
-
-// Load modules.
-modules['data'] = require('./modules/data.js');
 
 // Check if the command the user is trying to run exists.
 // If it does not, they are given an error.
