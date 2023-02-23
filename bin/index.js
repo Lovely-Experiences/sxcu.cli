@@ -23,11 +23,14 @@ function log(message, clearLastLine) {
         .replaceAll('[error]', `${colors.red}[error]${colors.reset}`)
         .replaceAll('[success]', `${colors.green}[success]${colors.reset}`);
 
+    let messageWithNoColors = messageToLog;
+    for (const color of Object.values(colors)) {
+        messageWithNoColors = messageWithNoColors.replaceAll(color, '');
+    }
+
+    if (config.noColors === true) messageToLog = messageWithNoColors;
+
     if (config.saveLogs === true) {
-        let messageWithNoColors = message;
-        for (const color of Object.values(colors)) {
-            messageWithNoColors = messageWithNoColors.replaceAll(color, '');
-        }
         if (!fs.existsSync(`${dataFolder}/logs.json`)) {
             fs.writeFileSync(
                 `${dataFolder}/logs.json`,

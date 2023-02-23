@@ -8,6 +8,7 @@ module.exports = {
         const fs = require('fs');
         const directory = data.arguments[1];
         const selfDestruct = data.arguments[2];
+        const config = data.modules.data.getConfig();
         if (directory !== undefined) {
             const fileExists = fs.existsSync(directory);
             if (fileExists === true) {
@@ -55,16 +56,13 @@ module.exports = {
                     data.log('[error] Unable to upload any files in the directory provided.');
                 } else {
                     const newFileName = `output-${new Date().getTime()}.json`;
-                    fs.writeFile(newFileName, JSON.stringify({ output: links }), function (error) {
-                        if (error) {
-                            data.log(`[error] Failed to save output to file, dumping to console...`, true);
-                            for (const link of links) {
-                                data.log(`[info] URL for file "${link.file}" is ${link.url}.`);
-                            }
-                        } else {
-                            data.log(`[success] Result/links can be found in "${process.cwd()}/${newFileName}".`);
-                        }
-                    });
+                    fs.writeFileSync(newFileName, JSON.stringify({ output: links }, null, 4));
+                    if (config.outputBackups === true)
+                        fs.writeFileSync(
+                            `${data.modules.data.getDataFolder()}/backups/${newFileName}`,
+                            JSON.stringify({ output: links }, null, 4)
+                        );
+                    data.log(`[success] Result/links can be found in "${process.cwd()}/${newFileName}".`);
                 }
             } else {
                 data.log(`[error] The directory "${directory}" does not exist on the current directory.`);

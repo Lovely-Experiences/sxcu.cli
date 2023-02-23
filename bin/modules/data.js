@@ -5,11 +5,16 @@ const homeDir = os.homedir();
 
 const defaultSettings = {
     saveLogs: false,
+    noColors: false,
+    outputBackups: true,
 };
 
 const settingDescriptions = {
     saveLogs:
         'If true, all outputs from sxcu.cli will be added to a log.json file. Only recommended for testing purposes.',
+    noColors: 'If true, colors will be removed from all responses.',
+    outputBackups:
+        'If true, whenever an output file is created, it will also be saved under a backup directory. (.sxcu-cli/backups)',
 };
 
 // This methods will create the storage folders if they are not already present.
@@ -20,6 +25,10 @@ function createDataFolders() {
 
     if (!fs.existsSync(`${homeDir}/.sxcu-cli/configs`)) {
         fs.mkdirSync(`${homeDir}/.sxcu-cli/configs`);
+    }
+
+    if (!fs.existsSync(`${homeDir}/.sxcu-cli/backups`)) {
+        fs.mkdirSync(`${homeDir}/.sxcu-cli/backups`);
     }
 
     if (!fs.existsSync(`${homeDir}/.sxcu-cli/README.txt`)) {
