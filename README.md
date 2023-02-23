@@ -34,7 +34,7 @@ The directory `cats` is a testing directory, use to test the uploading of images
 
 ## Links
 
-### sxcu.api
+### sxcu.cli
 
 -   **GitHub:** [https://github.com/Lovely-Experiences/sxcu.cli](https://github.com/Lovely-Experiences/sxcu.cli)
 -   **NPM:** [https://www.npmjs.com/package/sxcu.cli](https://www.npmjs.com/package/sxcu.cli)
