@@ -2,7 +2,7 @@
 
 Command line interface to interact with the sxcu.net API.
 
-[Demo](https://user-images.githubusercontent.com/57332486/219874950-9e22e6d5-43fa-4c20-bcb7-591ca4928305.mp4)
+[Demo Video](https://user-images.githubusercontent.com/57332486/219874950-9e22e6d5-43fa-4c20-bcb7-591ca4928305.mp4)
 
 Interested in a library instead? Visit [sxcu.api](https://github.com/Lovely-Experiences/sxcu.api).
 
@@ -30,7 +30,7 @@ However, if you have any questions that can't be answered with the available com
 
 The directory `cats` is a testing directory, use to test the uploading of images. Feel free to put whatever in this folder, just do not include any changes to it in your pull request if you decide to make one.
 
-> **Note:** sxcu.cli creates a folder called `sxcu.cli` in the current user's home directory. This folder is used to store backups, logs, etc. It will not be deleted automatically if you uninstall sxcu.cli. You can get the path to the sxcu folder/configuration file by running `sxcu settings path`. Feel free to edit the configuration file manually.
+> **Note:** sxcu.cli creates a folder called `.sxcu-cli` in the current user's home directory. This folder is used to store backups, logs, etc. It will not be deleted automatically if you uninstall sxcu.cli. You can get the path to the sxcu folder/configuration file by running `sxcu settings path`. Feel free to edit the configuration file manually.
 
 ## Links
 
