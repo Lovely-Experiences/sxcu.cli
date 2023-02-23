@@ -48,4 +48,4 @@ The directory `cats` is a testing directory, use to test the uploading of images
 
 ## Releases
 
-You may view all available releases [here (NPM)](https://www.npmjs.com/package/sxcu.api?activeTab=versions). It's important to note that NPM releases do not contain the `/cats` directory.
+You may view all available releases [here (NPM)](https://www.npmjs.com/package/sxcu.cli?activeTab=versions). It's important to note that NPM releases do not contain the `/cats` directory.
