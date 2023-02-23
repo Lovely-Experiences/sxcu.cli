@@ -39,7 +39,7 @@ module.exports = {
                     data.log(`[error] "${setting}" is not a valid setting.`);
                 } else {
                     if (typeof config[setting] === 'boolean') {
-                        convertedValue = value.toLowerCase();
+                        const convertedValue = value.toLowerCase();
                         if (convertedValue === 'true' || convertedValue === 'false') {
                             config[setting] = convertedValue === 'true';
                             dataModule.updateConfig(config);
