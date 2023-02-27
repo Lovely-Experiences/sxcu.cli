@@ -2,7 +2,7 @@ module.exports = {
     name: 'settings',
     aliases: [],
     description: 'View and edit settings.',
-    usage: 'sxcu settings <action: view/set/path>',
+    usage: 'sxcu settings <action: view/set/path/open>',
     run: function (data) {
         const dataModule = data.modules['data'];
         switch (data.arguments[1]) {
@@ -14,7 +14,9 @@ module.exports = {
                     const green = data.colors.green;
                     const yellow = data.colors.yellow;
                     const reset = data.colors.reset;
-                    data.log(`[info] ${yellow}${setting}${reset} (${typeof value}) -> ${green}${value}${reset}`);
+                    let parsedValue = value;
+                    if (typeof parsedValue === 'string') parsedValue = `"${parsedValue}"`;
+                    data.log(`[info] ${yellow}${setting}${reset} (${typeof value}) -> ${green}${parsedValue}${reset}`);
                     data.log(`[info] ^ ${description}`);
                 }
                 break;
@@ -57,9 +59,20 @@ module.exports = {
                 }
                 break;
             }
+            case 'open': {
+                // data.log('[info] Opening folder...');
+                try {
+                    data.modules['file-explorer'].open(dataModule.getDataFolder());
+                    // data.log('[success] Opened! Ending process...');
+                    process.exit();
+                } catch (error) {
+                    data.log(`[error] ${error}`);
+                }
+                break;
+            }
             default: {
                 data.log('[error] Invalid action provided, please run "sxcu settings <action>".');
-                data.log('[info] Actions: view, set, path');
+                data.log('[info] Actions: view, set, path, open');
             }
         }
     },

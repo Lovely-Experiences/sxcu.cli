@@ -60,6 +60,7 @@ function log(message, clearLastLine) {
 
 // Load modules.
 modules['data'] = require('./modules/data.js');
+modules['file-explorer'] = require('./modules/file-explorer.js');
 
 // Check if the user is using an unrecommended version of Node.
 // Display and error if they are.
