@@ -1,4 +1,6 @@
 # sxcu.cli
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FLovely-Experiences%2Fsxcu.cli.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FLovely-Experiences%2Fsxcu.cli?ref=badge_shield)
+
 
 Command line interface to interact with the sxcu.net API.
 
@@ -49,3 +51,7 @@ The directory `cats` is a testing directory, use to test the uploading of images
 ## Releases
 
 You may view all available releases [here (NPM)](https://www.npmjs.com/package/sxcu.cli?activeTab=versions). Testing directories such as `cats` are not included
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FLovely-Experiences%2Fsxcu.cli.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FLovely-Experiences%2Fsxcu.cli?ref=badge_large)
