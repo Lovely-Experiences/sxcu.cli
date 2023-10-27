@@ -1,3 +1,5 @@
+# This repo is no longer updated! Please see https://github.com/jacobhumston/sxcu.api for the updated cli.
+
 # sxcu.cli
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FLovely-Experiences%2Fsxcu.cli.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FLovely-Experiences%2Fsxcu.cli?ref=badge_shield)
 
